@@ -1,22 +1,24 @@
 <div class="container">
   <h4 class="my-2">Top Contributors</h4>
   <div class="row">
-    <div *ngFor="let contributor of contributors$ | async" class="card col-md-3">
-      <div class="card-top-part m-3 d-flex justify-content-between">
-        <div class="d-flex align-items-end">
-          <img style="width: 5rem;" src="{{ contributor.avatar_url }}" class="card-img-left" alt="avatar_url">
-          <small>@github</small>
+    <div *ngFor="let contributor of contributors$ | async" class="col-12 col-md-6 col-lg-3">
+      <div class="card mb-3">
+        <div class="card-top-part m-3 d-flex justify-content-between">
+          <div class="d-flex align-items-end">
+            <img style="width: 5rem;" src="{{ contributor.avatar_url }}" class="card-img-left" alt="avatar_url">
+            <small>@github</small>
+          </div>
+          <div class="float-right">
+            <span class=""><i class="fa fa-2x fa-crosshairs"></i></span>
+          </div>
         </div>
-        <div class="float-right">
-          <span class=""><i class="fa fa-2x fa-crosshairs"></i></span>
+        <div class="card-body">
+          <h4 class="card-title">{{ contributor.login }}</h4>
+          {{ contributor.contributions }} commits
         </div>
-      </div>
-      <div class="card-body">
-        <h4 class="card-title">{{ contributor.login }}</h4>
-        {{ contributor.contributions }} commits
-      </div>
-      <div class="button text-center m-3">
-        <a [routerLink]="['/repositories', contributor.login]" class="btn btn-outline-primary">VIEW REPOSITORIES</a>
+        <div class="button text-center m-3">
+          <a [routerLink]="['/repositories', contributor.login]" class="btn btn-outline-primary">VIEW REPOSITORIES</a>
+        </div>
       </div>
     </div>
   </div>
