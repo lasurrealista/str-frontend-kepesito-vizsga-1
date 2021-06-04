@@ -8,14 +8,14 @@ import { Contributor } from '../model/contributor';
 })
 export class ContributorService {
 
-  apiUrlContributors = "https://api.github.com/repos/angular/angular/contributors?per_page=100";
+  apiUrlContributors = "https://api.github.com/repos/angular/angular/contributors?per_page=24";
 
   constructor(
     private httpClient: HttpClient,
   ) { }
 
-  getAllContributors(): Observable<Contributor[]> {
-    return this.httpClient.get<Contributor[]>(this.apiUrlContributors)
+  getAllContributors(page: number): Observable<Contributor[]> {
+    return this.httpClient.get<Contributor[]>(`${this.apiUrlContributors}&page=${page}`)
   }
 
 
