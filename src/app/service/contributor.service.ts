@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class ContributorService {
 
+  public entity: string = '';
   apiUrlContributors = "https://api.github.com/repos/angular/angular/contributors?per_page=24";
   public $list: BehaviorSubject<Contributor[]> = new BehaviorSubject<Contributor[]>([]);
 
@@ -17,14 +18,16 @@ export class ContributorService {
   ) { }
 
   getAllContributors(page: number): Observable<Contributor[]> {
-    return this.http.get<Contributor[]>(`${this.apiUrlContributors}&page=${page}`).pipe(
-      tap( (data: Contributor[]) => this.$list.next(data) )
+    return this.http.get<Contributor[]>(
+      `${this.apiUrlContributors}${this.entity}&page=${page}`
+        ).pipe(
+          tap( (data: Contributor[]) => this.$list.next(data) )
     );
   }
 
   loadPage(page: number): void {
     this.http.get<Contributor[]>(
-      `${this.apiUrlContributors}&page=${page}`).subscribe(
+      `${this.apiUrlContributors}${this.entity}&page=${page}`).subscribe(
       (data: Contributor[]) => {
         this.$list.next( [...this.$list.value, ...data] );
       }

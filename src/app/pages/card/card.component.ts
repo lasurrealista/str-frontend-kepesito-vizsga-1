@@ -21,7 +21,6 @@ export class CardComponent implements OnInit {
     const isBottom = document.body.offsetHeight - window.scrollY - 500 < 500;
     if (isBottom) {
       this.page++;
-      this.contributors$ = this.contributorService.getAllContributors(this.page);
       this.contributorService.loadPage(this.page);
     }
   });
