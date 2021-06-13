@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Observable } from 'rxjs';
 import { Contributor } from 'src/app/model/contributor';
 import { ContributorService } from 'src/app/service/contributor.service';
@@ -17,19 +18,26 @@ export class CardComponent implements OnInit {
   @Input() login: string = '';
   @Input() contributions: number = 0;
 
-  eventSubscription = fromEvent(window, "scroll").subscribe(e => {
+  eventSubscription = fromEvent(window, "scroll").subscribe(
+    e => {
     const isBottom = document.body.offsetHeight - window.scrollY - 500 < 500;
     if (isBottom) {
       this.page++;
       this.contributorService.loadPage(this.page);
+    };
+      (error: any) => {
+        this.toastrService.error('Cannot load this page', 'Error');
     }
   });
 
   constructor(
-    private contributorService: ContributorService
+    private contributorService: ContributorService,
+    private toastrService: ToastrService
   ) { }
 
     ngOnInit(): void {
-      this.contributorService.getAllContributors(this.page).subscribe( () => {} );
+      this.contributorService.getAllContributors(this.page).subscribe(
+        () => {}
+      );
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Repositories } from 'src/app/model/repositories';
 import { RepositoriesService } from 'src/app/service/repositories.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-repositories',
@@ -11,9 +12,8 @@ import { RepositoriesService } from 'src/app/service/repositories.service';
 })
 export class RepositoriesComponent implements OnInit {
 
-  page: number = 1;
   login = this.route.snapshot.paramMap.get('login')!;
-  repositories$: Observable<Repositories[]> = this.repositoriesService.getUserRepositories(this.login, this.page);
+  repositories$: Observable<Repositories[]> = this.repositoriesService.getUserRepositories(this.login);
 
   @Input() name: string = '';
   @Input() fork: boolean = false;
@@ -22,12 +22,18 @@ export class RepositoriesComponent implements OnInit {
 
   constructor(
     private repositoriesService: RepositoriesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit(): void {
     const login = this.route.snapshot.paramMap.get('login')!;
-    this.repositoriesService.getUserRepositories(login, this.page).subscribe()
+    this.repositoriesService.getUserRepositories(login).subscribe(
+     () => {}
+    );
+    (error: any) => {
+      this.toastrService.error('Cannot load this page', 'Error');
+  }
   }
 
 }

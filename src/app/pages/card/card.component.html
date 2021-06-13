@@ -1,6 +1,6 @@
   <div class="row">
     <h4 class="my-2">Top Contributors</h4>
-    <div *ngFor="let contributor of contributors$ | async" class="col-12 col-md-6 col-lg-3">
+    <div *ngFor="let contributor of contributors$ | async | sorter:'contributions'" class="col-12 col-md-6 col-lg-3">
       <div class="card mb-4">
         <div class="card-top-part m-3 d-flex justify-content-between">
           <div class="d-flex align-items-end">

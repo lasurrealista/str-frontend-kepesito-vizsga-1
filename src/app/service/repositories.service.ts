@@ -16,7 +16,7 @@ export class RepositoriesService {
     private route: ActivatedRoute,
   ) { }
 
-  getUserRepositories(login: string, page: number): Observable<Repositories[]> {
-    return this.http.get<Repositories[]>(`${this.apiUrlRepositories}/${login}/repos?page=${page}`);
+  getUserRepositories(login: string): Observable<Repositories[]> {
+    return this.http.get<Repositories[]>(`${this.apiUrlRepositories}/${login}/repos`);
   }
 }
