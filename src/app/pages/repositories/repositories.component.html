@@ -1,5 +1,5 @@
 <div class="table-responsive">
-      <table class="table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let repo of repositories$ | async">
+          <tr *ngFor="let repo of repositories$ | async | sorter:'updated_at'">
             <td>
               {{ repo.name }}
             </td>

@@ -5,13 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './pages/card/card.component';
-import { RepositoriesComponent } from './pages/repositories/repositories.component'
+import { RepositoriesComponent } from './pages/repositories/repositories.component';
+import { SorterPipe } from './pipe/sorter.pipe'
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    RepositoriesComponent
+    RepositoriesComponent,
+    SorterPipe
   ],
   imports: [
     BrowserModule,
