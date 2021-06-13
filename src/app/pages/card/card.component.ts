@@ -11,7 +11,7 @@ import { ContributorService } from 'src/app/service/contributor.service';
 export class CardComponent implements OnInit {
 
   page: number = 1;
-  contributors$: Observable<Contributor[]> = this.contributorService.getAllContributors(this.page);
+  contributors$: Observable<Contributor[]> = this.contributorService.$list;
 
   @Input() avatar_url: string = '';
   @Input() login: string = '';
@@ -22,6 +22,7 @@ export class CardComponent implements OnInit {
     if (isBottom) {
       this.page++;
       this.contributors$ = this.contributorService.getAllContributors(this.page);
+      this.contributorService.loadPage(this.page);
     }
   });
 
@@ -30,6 +31,6 @@ export class CardComponent implements OnInit {
   ) { }
 
     ngOnInit(): void {
-      this.contributorService.getAllContributors(this.page)
+      this.contributorService.getAllContributors(this.page).subscribe( () => {} );
   }
 }

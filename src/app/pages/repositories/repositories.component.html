@@ -1,1 +1,36 @@
-<p>repositories works!</p>
+<div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              Name:
+            </th>
+            <th>
+              Fork:
+            </th>
+            <th>
+              Stargazers count:
+            </th>
+            <th>
+              Update at:
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let repo of repositories$ | async">
+            <td>
+              {{ repo.name }}
+            </td>
+            <td>
+              {{ repo.fork }}
+            </td>
+            <td>
+              {{ repo.stargazers_count }}
+            </td>
+            <td>
+              {{ repo.updated_at }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
