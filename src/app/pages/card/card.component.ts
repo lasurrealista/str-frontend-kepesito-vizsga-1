@@ -14,10 +14,6 @@ export class CardComponent implements OnInit {
   page: number = 1;
   contributors$: Observable<Contributor[]> = this.contributorService.$list;
 
-  @Input() avatar_url: string = '';
-  @Input() login: string = '';
-  @Input() contributions: number = 0;
-
   eventSubscription = fromEvent(window, "scroll").subscribe(
     e => {
     const isBottom = document.body.offsetHeight - window.scrollY - 500 < 500;

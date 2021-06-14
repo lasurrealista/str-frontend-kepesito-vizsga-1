@@ -15,11 +15,6 @@ export class RepositoriesComponent implements OnInit {
   login = this.route.snapshot.paramMap.get('login')!;
   repositories$: Observable<Repositories[]> = this.repositoriesService.getUserRepositories(this.login);
 
-  @Input() name: string = '';
-  @Input() fork: boolean = false;
-  @Input() stargazers_count: number = 0;
-  @Input() updated_at: string = '';
-
   constructor(
     private repositoriesService: RepositoriesService,
     private route: ActivatedRoute,
